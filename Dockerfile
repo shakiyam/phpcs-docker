@@ -6,4 +6,5 @@ COPY composer.json composer.lock /app/
 WORKDIR /app
 RUN composer install --no-progress
 ENV PATH /app/vendor/bin:${PATH}
+WORKDIR /work
 ENTRYPOINT ["phpcs"]

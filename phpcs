@@ -6,13 +6,13 @@ if [[ $(command -v podman) ]]; then
     --name phpcs$$ \
     --rm \
     --security-opt label=disable \
-    -v "$PWD":/app \
+    -v "$PWD":/work \
     shakiyam/phpcs "$@"
 else
   docker container run \
     --name phpcs$$ \
     --rm \
     -u "$(id -u):$(id -g)" \
-    -v "$PWD":/app:ro \
+    -v "$PWD":/work:ro \
     shakiyam/phpcs "$@"
 fi
