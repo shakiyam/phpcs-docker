@@ -9,4 +9,4 @@ docker container run \
   -v "$(pwd)"/composer.json:/tmp/composer.json:ro \
   -v "$(pwd)"/composer.lock:/tmp/composer.lock \
   -w /tmp \
-  composer:2.0 composer update
+  composer:2.1 composer update
