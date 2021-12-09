@@ -17,11 +17,11 @@ build: ## Build an image from a Dockerfile
 
 hadolint: ## Lint Dockerfile
 	@echo -e "\033[36m$@\033[0m"
-	@hadolint Dockerfile
+	@./hadolint.sh Dockerfile
 
 shellcheck: ## Lint shell scripts
 	@echo -e "\033[36m$@\033[0m"
-	@shellcheck phpcs *.sh
+	@./shellcheck.sh phpcs *.sh
 
 update_lockfile: ## Update composer.lock
 	@echo -e "\033[36m$@\033[0m"
