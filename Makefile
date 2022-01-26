@@ -13,7 +13,7 @@ all: hadolint shellcheck shfmt update_lockfile build ## Lint, update composer.lo
 
 build: ## Build an image from a Dockerfile
 	@echo -e "\033[36m$@\033[0m"
-	@./tools/build.sh shakiyam/phpcs
+	@./tools/build.sh docker.io/shakiyam/phpcs
 
 hadolint: ## Lint Dockerfile
 	@echo -e "\033[36m$@\033[0m"
