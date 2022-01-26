@@ -1,18 +1,18 @@
 #!/bin/bash
 set -eu -o pipefail
 
-if [[ $(command -v podman) ]]; then
-  podman container run \
-    --name phpcs$$ \
-    --rm \
-    --security-opt label=disable \
-    -v "$PWD":/work \
-    shakiyam/phpcs "$@"
-else
+if [[ $(command -v docker) ]]; then
   docker container run \
     --name phpcs$$ \
     --rm \
     -u "$(id -u):$(id -g)" \
     -v "$PWD":/work:ro \
-    shakiyam/phpcs "$@"
+    docker.io/shakiyam/phpcs "$@"
+else
+  podman container run \
+    --name phpcs$$ \
+    --rm \
+    --security-opt label=disable \
+    -v "$PWD":/work \
+    docker.io/shakiyam/phpcs "$@"
 fi
