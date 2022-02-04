@@ -29,7 +29,7 @@ shfmt: ## Lint shell scripts
 
 update_lockfile: ## Update composer.lock
 	@echo -e "\033[36m$@\033[0m"
-	@./tools/update_lockfile.sh
+	@./tools/composer.sh update --no-install
 
 help: ## Print this help
 	@echo 'Usage: make [target]'
