@@ -11,7 +11,7 @@ if [[ -d "$PWD"/vendor ]]; then
       -v "$PWD"/composer.json:/app/composer.json:ro \
       -v "$PWD"/composer.lock:/app/composer.lock \
       -v "$PWD"/vendor:/app/vendor \
-      docker.io/composer:2.2 composer "$@"
+      docker.io/composer:2.3 composer "$@"
   else
     podman container run \
       --name composer$$ \
@@ -20,7 +20,7 @@ if [[ -d "$PWD"/vendor ]]; then
       -v "$PWD"/composer.json:/app/composer.json:ro \
       -v "$PWD"/composer.lock:/app/composer.lock \
       -v "$PWD"/vendor:/app/vendor \
-      docker.io/composer:2.2 composer "$@"
+      docker.io/composer:2.3 composer "$@"
   fi
 else
   if [[ $(command -v docker) ]]; then
@@ -31,7 +31,7 @@ else
       -v "$PWD"/composer.json:/tmp/composer.json:ro \
       -v "$PWD"/composer.lock:/tmp/composer.lock \
       -w /tmp \
-      docker.io/composer:2.2 composer "$@"
+      docker.io/composer:2.3 composer "$@"
   else
     podman container run \
       --name composer$$ \
@@ -40,6 +40,6 @@ else
       -v "$PWD"/composer.json:/tmp/composer.json:ro \
       -v "$PWD"/composer.lock:/tmp/composer.lock \
       -w /tmp \
-      docker.io/composer:2.2 composer "$@"
+      docker.io/composer:2.3 composer "$@"
   fi
 fi
