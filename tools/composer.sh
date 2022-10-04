@@ -1,6 +1,11 @@
 #!/bin/bash
 set -eu -o pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+readonly SCRIPT_DIR
+# shellcheck disable=SC1091
+. "$SCRIPT_DIR"/colored_echo.sh
+
 [[ -f composer.lock ]] || touch composer.lock
 if [[ -d "$PWD"/vendor ]]; then
   if [[ $(command -v docker) ]]; then
@@ -22,7 +27,7 @@ if [[ -d "$PWD"/vendor ]]; then
       -v "$PWD"/vendor:/app/vendor \
       docker.io/composer:2.4 composer "$@"
   else
-    echo "Neither docker nor podman is installed."
+    echo_error "Neither docker nor podman is installed."
     exit 1
   fi
 else
@@ -45,7 +50,7 @@ else
       -w /tmp \
       docker.io/composer:2.4 composer "$@"
   else
-    echo "Neither docker nor podman is installed."
+    echo_error "Neither docker nor podman is installed."
     exit 1
   fi
 fi
