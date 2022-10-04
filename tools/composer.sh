@@ -12,7 +12,7 @@ if [[ -d "$PWD"/vendor ]]; then
       -v "$PWD"/composer.lock:/app/composer.lock \
       -v "$PWD"/vendor:/app/vendor \
       docker.io/composer:2.4 composer "$@"
-  else
+  elif [[ $(command -v podman) ]]; then
     podman container run \
       --name composer$$ \
       --rm \
@@ -21,6 +21,9 @@ if [[ -d "$PWD"/vendor ]]; then
       -v "$PWD"/composer.lock:/app/composer.lock \
       -v "$PWD"/vendor:/app/vendor \
       docker.io/composer:2.4 composer "$@"
+  else
+    echo "Neither docker nor podman is installed."
+    exit 1
   fi
 else
   if [[ $(command -v docker) ]]; then
@@ -32,7 +35,7 @@ else
       -v "$PWD"/composer.lock:/tmp/composer.lock \
       -w /tmp \
       docker.io/composer:2.4 composer "$@"
-  else
+  elif [[ $(command -v podman) ]]; then
     podman container run \
       --name composer$$ \
       --rm \
@@ -41,5 +44,8 @@ else
       -v "$PWD"/composer.lock:/tmp/composer.lock \
       -w /tmp \
       docker.io/composer:2.4 composer "$@"
+  else
+    echo "Neither docker nor podman is installed."
+    exit 1
   fi
 fi
