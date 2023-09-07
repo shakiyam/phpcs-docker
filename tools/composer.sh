@@ -16,7 +16,7 @@ if [[ -d "$PWD"/vendor ]]; then
       -v "$PWD"/composer.json:/app/composer.json:ro \
       -v "$PWD"/composer.lock:/app/composer.lock \
       -v "$PWD"/vendor:/app/vendor \
-      docker.io/composer:2.5 composer "$@"
+      docker.io/composer:2.6 composer "$@"
   elif [[ $(command -v podman) ]]; then
     podman container run \
       --name composer$$ \
@@ -25,7 +25,7 @@ if [[ -d "$PWD"/vendor ]]; then
       -v "$PWD"/composer.json:/app/composer.json:ro \
       -v "$PWD"/composer.lock:/app/composer.lock \
       -v "$PWD"/vendor:/app/vendor \
-      docker.io/composer:2.5 composer "$@"
+      docker.io/composer:2.6 composer "$@"
   else
     echo_error 'Neither docker nor podman is installed.'
     exit 1
@@ -39,7 +39,7 @@ else
       -v "$PWD"/composer.json:/tmp/composer.json:ro \
       -v "$PWD"/composer.lock:/tmp/composer.lock \
       -w /tmp \
-      docker.io/composer:2.5 composer "$@"
+      docker.io/composer:2.6 composer "$@"
   elif [[ $(command -v podman) ]]; then
     podman container run \
       --name composer$$ \
@@ -48,7 +48,7 @@ else
       -v "$PWD"/composer.json:/tmp/composer.json:ro \
       -v "$PWD"/composer.lock:/tmp/composer.lock \
       -w /tmp \
-      docker.io/composer:2.5 composer "$@"
+      docker.io/composer:2.6 composer "$@"
   else
     echo_error 'Neither docker nor podman is installed.'
     exit 1
