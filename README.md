@@ -1,7 +1,7 @@
 phpcs-docker
 ============
 
-[PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) Docker Image
+[PHP_CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer) Docker Image
 
 How to Use
 ----------
