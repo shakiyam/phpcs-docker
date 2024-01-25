@@ -8,7 +8,7 @@ readonly SCRIPT_DIR
 
 [[ -f composer.lock ]] || touch composer.lock
 if [[ -d "$PWD"/vendor ]]; then
-  if [[ $(command -v docker) ]]; then
+  if command -v docker &>/dev/null; then
     docker container run \
       --name composer$$ \
       --rm \
@@ -17,7 +17,7 @@ if [[ -d "$PWD"/vendor ]]; then
       -v "$PWD"/composer.lock:/app/composer.lock \
       -v "$PWD"/vendor:/app/vendor \
       docker.io/composer:2.6 composer "$@"
-  elif [[ $(command -v podman) ]]; then
+  elif command -v podman &>/dev/null; then
     podman container run \
       --name composer$$ \
       --rm \
@@ -31,7 +31,7 @@ if [[ -d "$PWD"/vendor ]]; then
     exit 1
   fi
 else
-  if [[ $(command -v docker) ]]; then
+  if command -v docker &>/dev/null; then
     docker container run \
       --name composer$$ \
       --rm \
@@ -40,7 +40,7 @@ else
       -v "$PWD"/composer.lock:/tmp/composer.lock \
       -w /tmp \
       docker.io/composer:2.6 composer "$@"
-  elif [[ $(command -v podman) ]]; then
+  elif command -v podman &>/dev/null; then
     podman container run \
       --name composer$$ \
       --rm \
