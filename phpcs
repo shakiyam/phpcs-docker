@@ -7,14 +7,14 @@ if command -v docker &>/dev/null; then
     --rm \
     -u "$(id -u):$(id -g)" \
     -v "$PWD":/work:ro \
-    docker.io/shakiyam/phpcs "$@"
+    ghcr.io/shakiyam/phpcs "$@"
 elif command -v podman &>/dev/null; then
   podman container run \
     --name phpcs$$ \
     --rm \
     --security-opt label=disable \
     -v "$PWD":/work \
-    docker.io/shakiyam/phpcs "$@"
+    ghcr.io/shakiyam/phpcs "$@"
 else
   echo "Neither docker nor podman is installed."
   exit 1
