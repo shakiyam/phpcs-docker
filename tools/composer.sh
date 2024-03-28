@@ -6,7 +6,7 @@ readonly SCRIPT_DIR
 # shellcheck disable=SC1091
 . "$SCRIPT_DIR"/colored_echo.sh
 
-[[ -f composer.lock ]] || touch composer.lock
+[[ -f composer.lock ]] || echo "{}" >composer.lock
 if [[ -d "$PWD"/vendor ]]; then
   if command -v docker &>/dev/null; then
     docker container run \
