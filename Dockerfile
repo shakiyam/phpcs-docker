@@ -1,4 +1,4 @@
-FROM docker.io/composer:2.7 AS composer
+FROM docker.io/composer:2.8 AS composer
 
 FROM docker.io/php:8.3-alpine3.20
 COPY --from=composer /usr/bin/composer /usr/bin/composer
