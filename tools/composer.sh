@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu -o pipefail
+set -Eeu -o pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 readonly SCRIPT_DIR
@@ -10,7 +10,7 @@ readonly SCRIPT_DIR
 if [[ -d "$PWD"/vendor ]]; then
   if command -v docker &>/dev/null; then
     docker container run \
-      --name composer$$ \
+      --name "composer_$(uuidgen | head -c8)" \
       --rm \
       --user "$(id -u)":"$(id -g)" \
       -v "$PWD"/composer.json:/app/composer.json:ro \
@@ -19,7 +19,7 @@ if [[ -d "$PWD"/vendor ]]; then
       docker.io/composer:2.8 composer "$@"
   elif command -v podman &>/dev/null; then
     podman container run \
-      --name composer$$ \
+      --name "composer_$(uuidgen | head -c8)" \
       --rm \
       --security-opt label=disable \
       -v "$PWD"/composer.json:/app/composer.json:ro \
@@ -33,7 +33,7 @@ if [[ -d "$PWD"/vendor ]]; then
 else
   if command -v docker &>/dev/null; then
     docker container run \
-      --name composer$$ \
+      --name "composer_$(uuidgen | head -c8)" \
       --rm \
       --user "$(id -u)":"$(id -g)" \
       -v "$PWD"/composer.json:/tmp/composer.json:ro \
@@ -42,7 +42,7 @@ else
       docker.io/composer:2.8 composer "$@"
   elif command -v podman &>/dev/null; then
     podman container run \
-      --name composer$$ \
+      --name "composer_$(uuidgen | head -c8)" \
       --rm \
       --security-opt label=disable \
       -v "$PWD"/composer.json:/tmp/composer.json:ro \
