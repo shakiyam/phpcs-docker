@@ -12,6 +12,14 @@ build: ## Build an image from a Dockerfile
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/build.sh ghcr.io/shakiyam/phpcs
 
+check_for_action_updates: ## Check for GitHub Actions updates
+	@echo -e "\033[36m$@\033[0m"
+	@./tools/check_for_action_updates.sh actions/checkout
+	@./tools/check_for_action_updates.sh docker/build-push-action
+	@./tools/check_for_action_updates.sh docker/login-action
+	@./tools/check_for_action_updates.sh docker/setup-buildx-action
+	@./tools/check_for_action_updates.sh docker/setup-qemu-action
+
 check_for_image_updates: ## Check for image updates
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/check_for_image_updates.sh "$(shell awk -e '/FROM/{print $$2}' Dockerfile | grep composer)" docker.io/composer:latest
@@ -21,15 +29,7 @@ check_for_library_updates: ## Check for library updates
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/composer.sh update --no-install
 
-check_for_new_release: ## Check for new release
-	@echo -e "\033[36m$@\033[0m"
-	@./tools/check_for_new_release.sh actions/checkout "$(shell grep -o 'actions/checkout@[^\/]*' .github/workflows/docker.yml | awk -F'@' 'NR==1{printf "%s", $$2}')" '(v[0-9]+)'
-	@./tools/check_for_new_release.sh docker/build-push-action "$(shell grep -o 'docker/build-push-action@[^\/]*' .github/workflows/docker.yml | awk -F'@' 'NR==1{printf "%s", $$2}')" '(v[0-9]+)'
-	@./tools/check_for_new_release.sh docker/login-action "$(shell grep -o 'docker/login-action@[^\/]*' .github/workflows/docker.yml | awk -F'@' 'NR==1{printf "%s", $$2}')" '(v[0-9]+)'
-	@./tools/check_for_new_release.sh docker/setup-buildx-action "$(shell grep -o 'docker/setup-buildx-action@[^\/]*' .github/workflows/docker.yml | awk -F'@' 'NR==1{printf "%s", $$2}')" '(v[0-9]+)'
-	@./tools/check_for_new_release.sh docker/setup-qemu-action "$(shell grep -o 'docker/setup-qemu-action@[^\/]*' .github/workflows/docker.yml | awk -F'@' 'NR==1{printf "%s", $$2}')" '(v[0-9]+)'
-
-check_for_updates: check_for_image_updates check_for_library_updates check_for_new_release ## Check for updates to all dependencies
+check_for_updates: check_for_action_updates check_for_image_updates check_for_library_updates ## Check for updates to all dependencies
 
 hadolint: ## Lint Dockerfile
 	@echo -e "\033[36m$@\033[0m"
