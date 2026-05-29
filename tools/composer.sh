@@ -6,7 +6,7 @@ readonly SCRIPT_DIR
 # shellcheck disable=SC1091
 . "$SCRIPT_DIR"/colored_echo.sh
 
-readonly COMPOSER_IMAGE="docker.io/composer:2.9"
+readonly COMPOSER_IMAGE="docker.io/composer:2.10"
 
 [[ -f composer.lock ]] || echo "{}" >composer.lock
 if [[ -d "$PWD"/vendor ]]; then
