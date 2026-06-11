@@ -1,6 +1,6 @@
 FROM docker.io/composer:2.10 AS composer
 
-FROM docker.io/php:8.5-alpine3.23
+FROM docker.io/php:8.5-alpine3.24
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY composer.json composer.lock /app/
 WORKDIR /app
