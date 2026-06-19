@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Run check_for_image_updates.sh
         run: |
           ./tools/check_for_image_updates.sh "$(awk -e '/FROM/{print $2}' Dockerfile | grep composer)" docker.io/composer:latest
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Run composer update --no-install
         run: ./tools/composer.sh update --no-install
       - name: Run check_for_file_updates.sh
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Run check_for_action_updates.sh
         run: |
           ./tools/check_for_action_updates.sh actions/checkout
