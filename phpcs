@@ -13,7 +13,7 @@ elif command -v podman &>/dev/null; then
     --name "phpcs_$(uuidgen | head -c8)" \
     --rm \
     --security-opt label=disable \
-    -v "$PWD":/work \
+    -v "$PWD":/work:ro \
     ghcr.io/shakiyam/phpcs "$@"
 else
   echo "Neither docker nor podman is installed." >&2
