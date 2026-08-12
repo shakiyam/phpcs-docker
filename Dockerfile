@@ -8,5 +8,5 @@ RUN composer install --no-progress
 ENV PATH=/app/vendor/bin:${PATH}
 WORKDIR /work
 ARG SOURCE_COMMIT
-ENV SOURCE_COMMIT=$SOURCE_COMMIT
+LABEL org.opencontainers.image.revision=$SOURCE_COMMIT
 ENTRYPOINT ["phpcs"]
