@@ -32,6 +32,7 @@ check_for_image_updates: ## Check for image updates
 check_for_library_updates: ## Check for library updates
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/composer.sh update --no-install
+	@./tools/composer.sh outdated --direct --locked --major-only --strict
 
 check_for_updates: check_for_action_updates check_for_image_updates check_for_library_updates ## Check for updates to all dependencies
 
