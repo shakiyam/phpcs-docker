@@ -8,7 +8,7 @@ readonly SCRIPT_DIR
 # shellcheck disable=SC1091
 . "$SCRIPT_DIR"/container_engine.sh
 
-readonly COMPOSER_IMAGE="docker.io/composer:2.10"
+readonly COMPOSER_IMAGE="docker.io/composer:2.11"
 
 CONTAINER_ENGINE=$(detect_container_engine)
 readonly CONTAINER_ENGINE
