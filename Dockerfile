@@ -1,10 +1,10 @@
-FROM docker.io/composer:2.11 AS composer
-
-FROM docker.io/php:8.5-alpine3.24
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+FROM docker.io/composer:2.11 AS vendor
 COPY composer.json composer.lock /app/
 WORKDIR /app
 RUN composer install --no-progress
+
+FROM docker.io/php:8.5-alpine3.24
+COPY --from=vendor /app/vendor /app/vendor
 ENV PATH=/app/vendor/bin:${PATH}
 WORKDIR /work
 ARG SOURCE_COMMIT
