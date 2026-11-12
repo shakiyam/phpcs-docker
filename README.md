@@ -7,7 +7,7 @@ How to Use
 ----------
 
 ```console
-docker container run --rm -v "$PWD":/work:ro ghcr.io/shakiyam/phpcs --standard=PSR12 .
+docker container run --rm -u "$(id -u):$(id -g)" -v "$PWD":/work:ro ghcr.io/shakiyam/phpcs --standard=PSR12 .
 ```
 
 Author
